@@ -40,10 +40,6 @@ builder.add('inputs','select2', class extends builder.InputClass {
         if(typeof this._properties.callback.format === 'function'){
             this._properties.defaults.templateResult = this._properties.callback.format;
         }
-        if(this._properties.multiple){
-            input.attr('multiple',true);
-            input.attr('name','[]' + this._properties.name);
-        }
 
         // Return Input
         return input;
