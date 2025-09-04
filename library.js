@@ -88,6 +88,27 @@ builder.add('inputs','select2', class extends builder.InputClass {
         }
     }
 
+    val(value = null){
+
+        // Execute Parent
+        value = super.val(value);
+
+        // Sanitize value for empty arrays
+        if(Array.isArray(value)){
+            for(const [key, unique] of Object.entries(value)){
+                if(unique === '' || unique == null || unique === 'null' || unique === 'undefined'){
+                    delete value[key];
+                }
+            }
+            if(Object.entries(value).length === 0){
+                value = '[]';
+            }
+        }
+
+        // Return Value
+        return value;
+    }
+
     delete(id = null){
         if(id){
             if(typeof this._component.options[id] !== 'undefined'){
